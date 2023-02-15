@@ -3,7 +3,7 @@
 FROM python:3.7
 
 # Copy local code to the container image.
-ENV APP_HOME /app
+ENV APP_HOME /main
 WORKDIR $APP_HOME
 COPY . ./
 
