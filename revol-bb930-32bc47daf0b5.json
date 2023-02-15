@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "revol-bb930",
+  "private_key_id": "32bc47daf0b59133d49146e5c8e3b5512d138641",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDI7dm7HHCJAxuG\nQqmXUGbcFSjGs980Adve25V+NLX4cnafPe8u1VNWKdTaEWWc8fpDr+b+dw5NAYvn\nURAsWLODi43JMj9ozsuCpVu85eQ+wsvi5hbDx2WQteCWkBZDcYZ2EnUBVAkQ+LT0\nLD2knhZywBMh+HolRjdccvRLOu78e4WYDB6Pr0Yw/zyEzd/umiVwAcA3dNSzxkMr\nSWo00mm1xo8QeVO7tHkQWEySRd9B1p90OKBjXSJ0tdOuMhjaXqkYGWRPc63flQ8v\n/ns0wUUlJID3ET2a8Zt3ZatFpx+pPO3dHaufz/xXusVxi/7CuYJ9F5w9JP125/ms\n7codTVIXAgMBAAECggEAUN1EtOS3t7SL9cdLaI3fr7BGVl3atRwQaIr4CbBeEezD\nJ8htw+vv26v/MXox6m2KWoZnET9J/pziOMirmSVjrcvS1sfFtEERr3UsTAQ7jTSp\niJowTD+p9Qj1p7K6ew8r3cYE1/GBqpZlgSVy85b6EtmReaj+Q5UUP7016zb/KpY3\nFuB0dGyetna3e5dvj5EryVFo1E/X8AQRJet/sH2zbrUbxc42IEmB15XaRInSvxhY\n4IY9gWVQEONzIqfxqhwivWdSOtxUiNquLXg1cfK3dfy7gqsgpAxzHPCdvs1vzxIQ\ndsCT9hFmnvvX+2O1QZnUiNinNniV0DwCEjZU7SLdRQKBgQDr0vuyj0t6V5T0og0i\nwpeGEoDooCXvml56+ehUf829V/blwKUh/E53Zzc4hPERrc38HEZXdAGmrnUU8vhX\nWYUKBSPuXCgMS1BJDp59mUrrd9Foev1C6Z2FsZq6z4LVi7+gCp24Iq/4dzLe4f9W\nid8QwNTNnTOW9o7hUuAkqRY84wKBgQDaHpi0hBviJKHfT4EZqP8orkARYNdm93Gz\nLfiUWI9oDAX7J0mEF9pDb+paRCPZIk7SfxWq8dMOgKkw2mt7OMj/GsgAYoyzeGkQ\ndRDb0HwHeGVhuNsESQvrZvpIg9DSZs9FSGSfM12mr65Xa2mI3So54XFXhESxv6qs\n/efcDiTwPQKBgQDVLvTEVY/I+FW61KgFTV5HIIESSnwg3y8cAsEJakOmMFgNGJrv\nXzPb8x3TZTK8ZZ95kmHwevlnIfzLxF3GMTH4fe8ecobtnkPk12dlaWd19+oBhnVe\nwOvayVR0HlVLELtZRV+Q7yKe/bqqDCmUpKxXa8q0WbEifp9piE8CNSzaOwKBgQCe\n8OS9xfa7l44NN9YPaMJmVnOBNlxAP9euhbU6BD6bxwckuMAtbWQy9/6BwF2PAB0H\n7mtPod/2FXM0kjT4Gaz9l/pdrXJx5TBKOcQLKaT3nJfj2dxfBwuUgfmnlcY5S4mG\nJvaLu9ZmfGZCdZb1kJQQkWMSLuQP0mcAoBSwme340QKBgQDfFYWTRv1FSROFHDLY\nGb9Jyic/zaTkj7XT3GyBPaitLGhFu1KQEzbU0cKWsODJCZIBtZGNXDrVx+2m8yQp\nYHocdUVDyOTuuKl01CshleDQGQJZAbRYGSinOdOSlY52+s457u/wVZgDCaU/7Nvj\nAZJl/Y7LZi/AxhukaosOYThOcg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "revol-bb930@appspot.gserviceaccount.com",
+  "client_id": "116026406867620268228",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/revol-bb930%40appspot.gserviceaccount.com"
+}
