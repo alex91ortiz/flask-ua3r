@@ -27,4 +27,4 @@ def calculateTotal(data):
             entity = x["entity"]
             g[x["entity"]] = 0
         g[x["entity"]] += float(x["value"])
-    return g
+    return list(map(lambda x: {"entity": x, "value": g[x] },g.keys()))
