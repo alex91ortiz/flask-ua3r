@@ -6,7 +6,7 @@ from bucket import get_byte_objfile, list_files
 from process import match_image_invoice
 from response import result
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 
 def allowed_file(filename):
     return '.' in filename and \
