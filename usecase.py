@@ -13,7 +13,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def generatePaymentDetail(files):
-    dateProcess = date.today().strftime("%d%m%Y %H%m")
+    dateProcess = date.today().strftime("%Y%m%d")
     data = []
     for f in files:
         if f and allowed_file(f.filename):
