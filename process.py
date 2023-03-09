@@ -22,7 +22,7 @@ def match_image_invoice(file, cap):
 
     error, diff = mse(img1, img2)
     # print("Image matching Error between the two images:", error)
-    if (error < 1):
+    if (error < 5):
         return extract_text_from_image(detecte_specific_value(img, img2))
 
 
