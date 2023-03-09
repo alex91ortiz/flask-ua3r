@@ -23,7 +23,7 @@ def generatePaymentDetail(files):
             for cap in caps:
                 fileBytes, nameCap = get_byte_objfile(cap)
                 total = match_image_invoice(fileContent, fileBytes)
-                if total != None:
+                if total != None and total != "":
                     total = re.sub('[^0-9\.0-9\,]', '', total)
                     total = total.replace(".", "").replace(",", ".")
                     content = {"image": nameFile,
