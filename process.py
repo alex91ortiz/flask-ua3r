@@ -17,12 +17,16 @@ def match_image_invoice(file, cap):
                         dtype=np.uint8), cv2.IMREAD_UNCHANGED)
     img = crop_img(img, 0.80)
     img2 = crop_img(img2, 0.80)
+
+    img = resize_image(img,(512,512))
+    img2 = resize_image(img2,(512,512))
+
     img1 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 
     error, diff = mse(img1, img2)
-    # print("Image matching Error between the two images:", error)
-    if (error < 5):
+    #print("Image matching Error between the two images:", error)
+    if (error < 3):
         return extract_text_from_image(detecte_specific_value(img, img2))
 
 
@@ -34,7 +38,7 @@ def mse(img1, img2):
         err = np.sum(diff**2)
         mse = err/(float(h*w))
         return mse, diff
-    except:
+    except Exception as e:
         return 100, None
 
 
@@ -92,3 +96,20 @@ def removeImgTemp(img):
 def generateNameTemp():
     current_GMT = time.gmtime()
     return str(calendar.timegm(current_GMT)) + EXTENSION_OUT
+
+def resize_image(img, size=(28,28)):
+    h, w = img.shape[:2]
+    c = img.shape[2] if len(img.shape)>2 else 1
+    if h == w: 
+        return cv2.resize(img, size, cv2.INTER_AREA)
+    dif = h if h > w else w
+    interpolation = cv2.INTER_AREA if dif > (size[0]+size[1])//2 else cv2.INTER_CUBIC
+    x_pos = (dif - w)//2
+    y_pos = (dif - h)//2
+    if len(img.shape) == 2:
+        mask = np.zeros((dif, dif), dtype=img.dtype)
+        mask[y_pos:y_pos+h, x_pos:x_pos+w] = img[:h, :w]
+    else:
+        mask = np.zeros((dif, dif, c), dtype=img.dtype)
+        mask[y_pos:y_pos+h, x_pos:x_pos+w, :] = img[:h, :w, :]
+    return cv2.resize(mask, size, interpolation)
