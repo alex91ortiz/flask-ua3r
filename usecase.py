@@ -25,12 +25,14 @@ def generatePaymentDetail(files):
                 total = match_image_invoice(fileContent, fileBytes)
                 if total != None:
                     total = re.sub('[^0-9\.0-9\,]', '', total)
-                    total = total.replace(".", "").replace(",", ".")
+                    total = total.replace(",", "")
+                    total = total.replace(".", "")
                     if total != "":
+                        value = float(total)/100
                         content = {"image": nameFile,
                                 "entity": nameCap,
                                 "date": dateProcess,
-                                "value": total}
+                                "value": value}
                         data.append(content)
 
     return result(data)
