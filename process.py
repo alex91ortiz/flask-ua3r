@@ -25,7 +25,7 @@ def match_image_invoice(file, cap):
     img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 
     error, diff = mse(img1, img2)
-    #print("Image matching Error between the two images:", error)
+    print("Image matching Error between the two images:", error)
     if (error < 3):
         return extract_text_from_image(detecte_specific_value(img, img2))
 
@@ -46,6 +46,7 @@ def extract_text_from_image(img1):
     out_content = subprocess.run(
         ['tesseract', img1, '-', '-l', 'eng'], stdout=subprocess.PIPE).stdout.decode('utf-8')
     removeImgTemp(img1)
+    print(out_content)
     if out_content != "":
         return out_content
     return None
@@ -67,7 +68,7 @@ def detecte_specific_value(img1, img2):
             aspectRatio = float(w)/h
             if aspectRatio > 1.05:
                 # draws boundary of contours.
-                cv2.drawContours(img1, [approx], 0, (0, 0, 255), 5)
+                cv2.drawContours(img1, [approx], 0, (0, 0, 255), 2)
                 maxCountours.append(cnt)
     # Get contour with maximum area
     c = max(maxCountours, key=cv2.contourArea)
