@@ -26,5 +26,10 @@ def calculateTotal(data):
         if entity != x["entity"]:
             entity = x["entity"]
             g[x["entity"]] = 0
-        g[x["entity"]] += x["value"] if x["value"] != "" else 0.0
+        i = list(
+                map(
+                    lambda value: value["type"] == "NUMBER", x["value"]
+                )
+        ).index(True)
+        g[x["entity"]] += x["value"][i]["value"] if x["value"][i]["value"] != "" else 0.0
     return list(map(lambda x: {"entity": x, "value": g[x] },g.keys()))

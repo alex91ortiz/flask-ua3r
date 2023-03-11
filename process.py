@@ -25,9 +25,13 @@ def match_image_invoice(file, cap):
     img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 
     error, diff = mse(img1, img2)
-    print("Image matching Error between the two images:", error)
+    #print("Image matching Error between the two images:", error)
+    list_of_text = []
     if (error < 3):
-        return extract_text_from_image(detecte_specific_value(img, img2))
+        shapes_detected =  detecte_specific_value(img, img2)
+        for shape in shapes_detected:
+           list_of_text.append(extract_text_from_image(shape))
+    return  list_of_text  
 
 
 # define the function to compute MSE between two images
@@ -46,37 +50,43 @@ def extract_text_from_image(img1):
     out_content = subprocess.run(
         ['tesseract', img1, '-', '-l', 'eng'], stdout=subprocess.PIPE).stdout.decode('utf-8')
     removeImgTemp(img1)
-    print(out_content)
     if out_content != "":
         return out_content
     return None
 
 
 def detecte_specific_value(img1, img2):
-    _, threshold = cv2.threshold(img2, 110, 255, cv2.THRESH_BINARY)
+    _, threshold = cv2.threshold(img2, 127, 255, cv2.THRESH_BINARY)
     contours, _ = cv2.findContours(threshold, cv2.RETR_TREE,
                                    cv2.CHAIN_APPROX_SIMPLE)
     i = 0
     maxCountours = []
+    temp_img_cropped = generateNameTemp()
     for cnt in contours:
         if i == 0:
             i = 1
             continue
         approx = cv2.approxPolyDP(cnt, 0.009 * cv2.arcLength(cnt, True), True)
         if len(approx) == 4:
-            x, y, w, h = cv2.boundingRect(approx)
+            _, _, w, h = cv2.boundingRect(approx)
             aspectRatio = float(w)/h
-            if aspectRatio > 1.05:
+            area = cv2.contourArea(approx)
+            if aspectRatio > 1.05 and area > 800:
                 # draws boundary of contours.
                 cv2.drawContours(img1, [approx], 0, (0, 0, 255), 2)
-                maxCountours.append(cnt)
+                maxCountours.append(approx)
     # Get contour with maximum area
-    c = max(maxCountours, key=cv2.contourArea)
-    x1, y1, w1, h1 = cv2.boundingRect(c)
-    crop = img1[y1:y1+h1, x1:x1+w1, :].copy()
-    temp_img_cropped = generateNameTemp()
-    cv2.imwrite(temp_img_cropped, crop)
-    return temp_img_cropped
+    # c = max(maxCountours, key=cv2.contourArea)
+    j = 0
+    temp_img_position = []
+    for filcnt in maxCountours:   
+        x1, y1, w1, h1 = cv2.boundingRect(filcnt)
+        crop = img1[y1:y1+h1, x1:x1+w1, :].copy()
+        temp_img_cropped_index = str(j) + temp_img_cropped
+        cv2.imwrite(temp_img_cropped_index, crop)
+        temp_img_position.append(temp_img_cropped_index)
+        j = j + 1
+    return temp_img_position
 
 
 def crop_img(img, scale=1.0):

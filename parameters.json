@@ -1,0 +1,16 @@
+{
+    "DEFAULT":{
+        "positions":[
+            {
+                "name": "PRICE",
+                "type": "NUMBER",
+                "index": 0
+            },
+            {
+                "name": "ACCOUNT",
+                "type": "TEXT",
+                "index": 1
+            }
+        ]
+    }
+}
