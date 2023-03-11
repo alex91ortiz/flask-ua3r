@@ -7,7 +7,6 @@ import numpy as np
 
 EXTENSION_OUT = ".jpg"
 
-
 def match_image_invoice(file, cap):
     # converting to jpg
     img = cv2.imdecode(np.fromstring(
@@ -25,7 +24,7 @@ def match_image_invoice(file, cap):
     img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 
     error, diff = mse(img1, img2)
-    #print("Image matching Error between the two images:", error)
+    print("Image matching Error between the two images:", error)
     list_of_text = []
     if (error < 3):
         shapes_detected =  detecte_specific_value(img, img2)
@@ -45,7 +44,6 @@ def mse(img1, img2):
     except Exception as e:
         return 100, None
 
-
 def extract_text_from_image(img1):
     out_content = subprocess.run(
         ['tesseract', img1, '-', '-l', 'eng'], stdout=subprocess.PIPE).stdout.decode('utf-8')
@@ -54,10 +52,9 @@ def extract_text_from_image(img1):
         return out_content
     return None
 
-
 def detecte_specific_value(img1, img2):
-    _, threshold = cv2.threshold(img2, 127, 255, cv2.THRESH_BINARY)
-    contours, _ = cv2.findContours(threshold, cv2.RETR_TREE,
+    _, threshold = cv2.threshold(img2, 127, 255, cv2.THRESH_BINARY_INV)
+    contours, _ = cv2.findContours(threshold, cv2.RETR_EXTERNAL,
                                    cv2.CHAIN_APPROX_SIMPLE)
     i = 0
     maxCountours = []
@@ -88,7 +85,6 @@ def detecte_specific_value(img1, img2):
         j = j + 1
     return temp_img_position
 
-
 def crop_img(img, scale=1.0):
     _, center_y = img.shape[1] / 2, img.shape[0] / 2
     _, height_scaled = img.shape[1] * scale, img.shape[0] * scale
@@ -96,13 +92,11 @@ def crop_img(img, scale=1.0):
     img_cropped = img[int(top_y):int(bottom_y), :]
     return img_cropped
 
-
 def removeImgTemp(img):
     try:
         os.remove(img)
     except:
         pass
-
 
 def generateNameTemp():
     current_GMT = time.gmtime()

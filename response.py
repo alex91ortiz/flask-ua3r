@@ -31,5 +31,6 @@ def calculateTotal(data):
                     lambda value: value["type"] == "NUMBER", x["value"]
                 )
         ).index(True)
-        g[x["entity"]] += x["value"][i]["value"] if x["value"][i]["value"] != "" else 0.0
+        print(x)
+        g[x["entity"]] += x["value"][i]["value"] if  x["value"][i]["value"] != None else 0.0
     return list(map(lambda x: {"entity": x, "value": g[x] },g.keys()))
