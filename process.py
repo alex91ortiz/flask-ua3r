@@ -24,7 +24,7 @@ def match_image_invoice(file, cap):
     img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 
     error, diff = mse(img1, img2)
-    print("Image matching Error between the two images:", error)
+    #print("Image matching Error between the two images:", error)
     list_of_text = []
     if (error < 3):
         shapes_detected =  detecte_specific_value(img, img2)
@@ -53,12 +53,14 @@ def extract_text_from_image(img1):
     return None
 
 def detecte_specific_value(img1, img2):
-    _, threshold = cv2.threshold(img2, 127, 255, cv2.THRESH_BINARY_INV)
-    contours, _ = cv2.findContours(threshold, cv2.RETR_EXTERNAL,
+    _, threshold = cv2.threshold(img2, 127, 255, cv2.THRESH_BINARY)
+    contours, _ = cv2.findContours(threshold, cv2.RETR_TREE,
                                    cv2.CHAIN_APPROX_SIMPLE)
     i = 0
     maxCountours = []
     temp_img_cropped = generateNameTemp()
+    temp_area = 800.0
+    temp_aspectRatio = 1.05
     for cnt in contours:
         if i == 0:
             i = 1
@@ -68,12 +70,15 @@ def detecte_specific_value(img1, img2):
             _, _, w, h = cv2.boundingRect(approx)
             aspectRatio = float(w)/h
             area = cv2.contourArea(approx)
-            if aspectRatio > 1.05 and area > 800:
+            if aspectRatio > temp_aspectRatio and area > temp_area:
                 # draws boundary of contours.
-                cv2.drawContours(img1, [approx], 0, (0, 0, 255), 2)
-                maxCountours.append(approx)
+                cv2.drawContours(img1, [cnt], 0, (0, 0, 255), 2)
+                maxCountours.append(cnt)
+                temp_area = area
+                temp_aspectRatio = aspectRatio
     # Get contour with maximum area
     # c = max(maxCountours, key=cv2.contourArea)
+    #cv2.imwrite(temp_img_cropped, img1)
     j = 0
     temp_img_position = []
     for filcnt in maxCountours:   
