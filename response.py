@@ -31,15 +31,5 @@ def calculateTotal(data):
                 lambda value: value["type"] == "NUMBER", x["value"]
             )
         ).index(True)
-        g[x["entity"]] += validateValue(x["value"][i])
+        g[x["entity"]] += x["value"][i]["value"]
     return list(map(lambda x: {"entity": x, "value": g[x]}, g.keys()))
-
-
-def validateValue(value):
-    if "value" not in value:
-        if value["value"] != None:
-            return value["value"]
-        else:
-            return 0.0
-    else:
-        return 0.0

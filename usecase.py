@@ -23,16 +23,16 @@ def generatePaymentDetail(files):
             for cap in caps:
                 fileBytes, nameCap = get_byte_objfile(cap)
                 listData = match_image_invoice(fileContent, fileBytes)
-                value = prepareDataStructure(listData)
-                if len(value) > 0:
-                    content = {
-                        "image": nameFile,
-                        "entity": nameCap,
-                        "date": dateProcess,
-                        "value": value
-                    }
-                    data.append(content)
-
+                if len(listData) > 0:
+                    value = prepareDataStructure(listData)
+                    if len(value) > 0:
+                        content = {
+                            "image": nameFile,
+                            "entity": nameCap,
+                            "date": dateProcess,
+                            "value": value
+                        }
+                        data.append(content)
     return result(data)
 
 def prepareDataStructure(listData, id = "DEFAULT"):
@@ -49,7 +49,7 @@ def prepareDataStructure(listData, id = "DEFAULT"):
 
         field  = parameters[id]["positions"][p]
         if data != None:
-            if field["name"] == "PRICE":
+            if field["type"] == "NUMBER":
                 data = re.sub('[^0-9\.0-9\,]', '', data)
                 data = data.replace(",", "")
                 data = data.replace(".", "")
