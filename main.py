@@ -20,7 +20,7 @@ def upload_file():
             flash('No file part')
             return redirect(request.url)
         files = request.files.getlist("file")
-        return generatePaymentDetail(files, app)
+        return generatePaymentDetail(files)
 
 
 if __name__ == '__main__':
