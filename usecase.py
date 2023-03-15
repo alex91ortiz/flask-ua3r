@@ -27,7 +27,7 @@ def generatePaymentDetail(files):
                 if len(listData) > 0:
                     value = prepareDataStructure(listData)
                     if len(value) > 0:
-                        logging.info(value)
+                        logging.error(value)
                         content = {
                             "image": nameFile,
                             "entity": nameCap,
