@@ -57,6 +57,8 @@ def prepareDataStructure(listData, id = "DEFAULT"):
                     field["value"] = float(data)/100
             else:
                 field["value"] = data.strip()
+
+            print(field)
             list_field.append(field)
         x = x + 1
     return list_field
