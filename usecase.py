@@ -1,4 +1,5 @@
 
+import logging
 import re
 from datetime import date
 from werkzeug.utils import secure_filename
@@ -12,7 +13,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def generatePaymentDetail(files, app):
+def generatePaymentDetail(files):
     dateProcess = date.today().strftime("%Y%m%d")
     data = []
     for f in files:
@@ -26,7 +27,7 @@ def generatePaymentDetail(files, app):
                 if len(listData) > 0:
                     value = prepareDataStructure(listData)
                     if len(value) > 0:
-                        app.logger.info(value)
+                        logging.info(value)
                         content = {
                             "image": nameFile,
                             "entity": nameCap,
