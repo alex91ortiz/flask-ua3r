@@ -12,7 +12,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def generatePaymentDetail(files):
+def generatePaymentDetail(files, app):
     dateProcess = date.today().strftime("%Y%m%d")
     data = []
     for f in files:
@@ -26,6 +26,7 @@ def generatePaymentDetail(files):
                 if len(listData) > 0:
                     value = prepareDataStructure(listData)
                     if len(value) > 0:
+                        app.logger.info(value)
                         content = {
                             "image": nameFile,
                             "entity": nameCap,
@@ -48,7 +49,7 @@ def prepareDataStructure(listData, id = "DEFAULT"):
             ).index(True)
 
         field  = parameters[id]["positions"][p]
-        if data != None:
+        if data is not None:
             if field["type"] == "NUMBER":
                 data = re.sub('[^0-9\.0-9\,]', '', data)
                 data = data.replace(",", "")
@@ -57,8 +58,6 @@ def prepareDataStructure(listData, id = "DEFAULT"):
                     field["value"] = float(data)/100
             else:
                 field["value"] = data.strip()
-
-            print(field)
             list_field.append(field)
         x = x + 1
     return list_field
