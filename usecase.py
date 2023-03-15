@@ -27,7 +27,6 @@ def generatePaymentDetail(files):
                 if len(listData) > 0:
                     value = prepareDataStructure(listData)
                     if len(value) > 0:
-                        logging.error(value)
                         content = {
                             "image": nameFile,
                             "entity": nameCap,
@@ -57,6 +56,8 @@ def prepareDataStructure(listData, id = "DEFAULT"):
                 data = data.replace(".", "")
                 if data != "":
                     field["value"] = float(data)/100
+                else:
+                    field["value"] = 0.0
             else:
                 field["value"] = data.strip()
             list_field.append(field)
